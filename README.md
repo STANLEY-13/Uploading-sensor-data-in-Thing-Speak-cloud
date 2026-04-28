@@ -1,4 +1,6 @@
-# Uploading temperature sensor data in Thing Speak cloud
+## NAME : STANLEY S
+## REG NO : 212223110054
+# EX-03 Uploading temperature sensor data in Thing Speak cloud
 
 # AIM:
 To monitor the temperature sensor data in the Thing speak using an ESP32 controller.
@@ -71,10 +73,72 @@ Automatically act on your data and communicate using third-party services like T
 
 
 # PROGRAM:
+```
+#include "ThingSpeak.h"
+#include <WiFi.h>
+#include "DHT.h"
 
+char ssid[]= "SEC_IOT";
+char pass[]= "sec@3000";
+WiFiClient client;
+
+const int out = 2;
+float temperature = 0;
+float humidity = 0;
+DHT dht(out, DHT11);
+
+unsigned long myChannelField = 3360528 ; 
+const int TemperatureField = 1;
+const int HumidityField = 2;
+const char* myWriteAPIKey = "9QLRU0RWT81FS86O";
+
+void setup()
+{
+  Serial.begin(115200);
+  ThingSpeak.begin(client);
+  dht.begin();
+  pinMode(out,INPUT);
+}
+
+void loop()
+{
+  if(WiFi.status() != WL_CONNECTED)
+  {
+    Serial.print("Attempting to connect to SSID: ");
+    Serial.println(ssid);
+    while (WiFi.status() != WL_CONNECTED)
+    {
+      WiFi.begin(ssid,pass);
+      Serial.print(".");
+      delay(5000);
+    }
+    Serial.println("\nConnected");
+  }
+  float temperature = dht.readTemperature();
+  float humidity = dht.readHumidity();
+
+  Serial.print("Temperature: ");
+  Serial.print(temperature);
+  Serial.println(" °C");
+
+  Serial.print("Humidity ");
+  Serial.print(humidity);
+  Serial.println(" g.m-3");
+
+
+  ThingSpeak.setField(TemperatureField, temperature);
+  ThingSpeak.setField(HumidityField, humidity);
+  ThingSpeak.writeFields(myChannelField, myWriteAPIKey);
+  delay(5000);
+}
+
+```
 # CIRCUIT DIAGRAM:
+<img width="719" height="1280" alt="WhatsApp Image 2026-04-28 at 1 20 32 PM" src="https://github.com/user-attachments/assets/27adc485-65fe-4c2f-a922-d1afd6550574" />
+
 
 # OUTPUT:
+<img width="1920" height="1080" alt="Screenshot 2026-04-28 115040" src="https://github.com/user-attachments/assets/66fe42f9-1669-44a0-a1a2-686b94dedc67" />
 
 # RESULT:
 
