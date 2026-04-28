@@ -134,8 +134,7 @@ void loop()
 
 ```
 # CIRCUIT DIAGRAM:
-<img width="719" height="1280" alt="WhatsApp Image 2026-04-28 at 1 20 32 PM" src="https://github.com/user-attachments/assets/27adc485-65fe-4c2f-a922-d1afd6550574" />
-
+<img width="1024" height="1280" alt="image" src="https://github.com/user-attachments/assets/782660f5-9beb-41d0-8134-2d3c07c727f4" />
 
 # OUTPUT:
 <img width="1920" height="1080" alt="Screenshot 2026-04-28 115040" src="https://github.com/user-attachments/assets/66fe42f9-1669-44a0-a1a2-686b94dedc67" />
